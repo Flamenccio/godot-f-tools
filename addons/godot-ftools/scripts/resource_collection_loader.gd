@@ -16,9 +16,9 @@ static func load_resources(path: String, resource_class_name := "", recursive :=
 	if DirAccess.dir_exists_absolute(path):
 		push_error("Path '{path}' doesn't exist".format({"path": path}))
 		return result
-	var dir = DirAccess.open(path)
+	var dir := DirAccess.open(path)
 	dir.list_dir_begin()
-	var current = dir.get_next()
+	var current := dir.get_next()
 	while current != "":
 		var full_path = dir.get_current_dir().path_join(current)
 		if dir.current_is_dir() and recursive:
@@ -26,6 +26,7 @@ static func load_resources(path: String, resource_class_name := "", recursive :=
 		elif not dir.current_is_dir():
 			var res = load(full_path)
 			if res == null:
+				current = dir.get_next()
 				continue
 			var res_script := res.get_script() as Script
 			var is_resource_class := res_script.get_global_name() == resource_class_name or \
