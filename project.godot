@@ -14,6 +14,10 @@ config/name="Godot FTools"
 run/main_scene="uid://c3360hy8x55r3"
 config/features=PackedStringArray("4.6", "Mobile")
 
+[autoload]
+
+FTool_DebugDraw="*uid://02rhy3ymkb6d"
+
 [display]
 
 window/size/viewport_width=320

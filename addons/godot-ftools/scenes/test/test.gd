@@ -2,8 +2,7 @@ extends Node2D
 
 func _test_random_point() -> void:
 	var v = $FTool_AreaPointGenerator.get_random_area_point()
-	#print("RANDOM POINT: " + str(v))
-	var s := Sprite2D.new()
-	s.texture = load("res://icon.svg")
-	s.global_position = v
-	add_child(s)
+	FTool_DebugDraw.debug_draw_circle(3.0, v, 2.0, Color.RED)
+
+func _test_debug_draw() -> void:
+	FTool_DebugDraw.debug_draw_circle(3.0, Vector2.ZERO, 6.0, Color.RED)

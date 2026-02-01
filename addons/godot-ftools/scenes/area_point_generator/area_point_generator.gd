@@ -23,7 +23,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		save_shapes()
 		hide_shapes()
 
 ## Get a random point in a random shape area.

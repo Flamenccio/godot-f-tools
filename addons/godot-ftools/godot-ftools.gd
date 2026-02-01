@@ -1,15 +1,14 @@
 @tool
 extends EditorPlugin
 
+const SINGLETON_DEBUG_DRAW = "FTool_DebugDraw"
 
 func _enable_plugin() -> void:
-	# Add autoloads here.
-	pass
+	add_autoload_singleton(SINGLETON_DEBUG_DRAW, "res://addons/godot-ftools/scenes/debug_draw/debug_draw.gd")
 
 
 func _disable_plugin() -> void:
-	# Remove autoloads here.
-	pass
+	remove_autoload_singleton(SINGLETON_DEBUG_DRAW)
 
 
 func _enter_tree() -> void:
