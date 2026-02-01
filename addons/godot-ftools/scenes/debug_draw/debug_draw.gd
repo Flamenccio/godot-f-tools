@@ -5,7 +5,6 @@ extends Node2D
 signal processed(delta)
 signal draw_called()
 
-var _draws: Array[DrawProcess]
 var _draws_size := 0
 
 func _process(delta: float) -> void:
@@ -95,37 +94,20 @@ func debug_draw_polyline(duration: float, points: PackedVector2Array, color: Col
 		duration
 	)
 
-func _create_draw_process(draw_call: Callable, duration: float) -> DrawProcess:
+func _create_draw_process(draw_call: Callable, duration: float) -> FTool_DebugDrawProcess:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
-	var new_process := DrawProcess.new()
+	var new_process := FTool_DebugDrawProcess.new()
 	new_process.time_to_live = duration
 	new_process.draw_call = draw_call
 	new_process.destroy = _destroy_process
 	processed.connect(new_process.count_down)
 	draw_called.connect(new_process.draw_call)
-	_draws.append(new_process)
 	_draws_size += 1
 	return new_process
 
-func _destroy_process(process: DrawProcess) -> void:
+func _destroy_process(process: FTool_DebugDrawProcess) -> void:
 	processed.disconnect(process.count_down)
 	draw_called.disconnect(process.draw_call)
 	queue_redraw()
 	_draws_size -= 1
-	_draws.erase(process)
-
-class DrawProcess:
-
-	var time_to_live: float
-	var draw_call: Callable
-	var destroy: Callable
-	var is_destroying := false
-
-	func count_down(delta: float) -> void:
-		if is_destroying:
-			return
-		if time_to_live <= 0:
-			destroy.call(self)
-			is_destroying = true
-			return
-		time_to_live -= delta
+	process.call_deferred("free")
