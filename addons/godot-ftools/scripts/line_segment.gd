@@ -1,6 +1,8 @@
 class_name FTool_LineSegment
 extends RefCounted
-## Represents a line that pass through two points.
+## Represents a line [code]AB[/code] that pass through two points.
+##
+## Define the line by setting [code]point_a[/code] and [code]point_b[/code].
 
 var point_a := Vector2.ZERO
 var point_b := Vector2.ZERO
@@ -47,6 +49,7 @@ func get_intersection_point(line: FTool_LineSegment) -> Vector2:
 	return get_intersection_point_from_points(line.point_a, line.point_b)
 
 ## Returns the intersection point of this line and line [code]CD[/code].
+## Make sure to verify if the lines intersect using [code]intersects_line[/code].
 func get_intersection_point_from_points(point_c: Vector2, point_d: Vector2) -> Vector2:
 	var a1 = point_a
 	var a2 = point_b
