@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://cxs2p6lw83toa"]
+
+[ext_resource type="Script" uid="uid://cma5nqg412vkk" path="res://addons/godot-ftools/scenes/audio_bank_dock/audio_bank_dock.gd" id="1_nk3y8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ugaf"]
+
+[node name="AudioBankDock" type="ScrollContainer" unique_id=2061152622]
+process_mode = 4
+custom_minimum_size = Vector2(0, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scroll_hint_mode = 1
+script = ExtResource("1_nk3y8")
+
+[node name="MainSplit" type="HSplitContainer" parent="." unique_id=819616214]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/autohide = 0
+
+[node name="BankList" type="PanelContainer" parent="MainSplit" unique_id=13983201]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainSplit/BankList" unique_id=312765995]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="MainSplit/BankList/VBoxContainer" unique_id=238215851]
+layout_mode = 2
+placeholder_text = "Search item..."
+
+[node name="BankList" type="ItemList" parent="MainSplit/BankList/VBoxContainer" unique_id=980269096]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+max_columns = 2
+same_column_width = true
+fixed_column_width = 250
+
+[node name="BankItemEditor" type="PanelContainer" parent="MainSplit" unique_id=674543486]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Container" type="VBoxContainer" parent="MainSplit/BankItemEditor" unique_id=575529730]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainSplit/BankItemEditor/Container" unique_id=1966827256]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Edit Audio Bank Entry"
+label_settings = SubResource("LabelSettings_4ugaf")
+
+[node name="HSeparator" type="HSeparator" parent="MainSplit/BankItemEditor/Container" unique_id=1203294865]
+layout_mode = 2
+
+[node name="AudioId" type="HBoxContainer" parent="MainSplit/BankItemEditor/Container" unique_id=1259274627]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainSplit/BankItemEditor/Container/AudioId" unique_id=227972788]
+layout_mode = 2
+text = "Audio ID"
+
+[node name="AudioIdLine" type="LineEdit" parent="MainSplit/BankItemEditor/Container/AudioId" unique_id=1237666569]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "audio id"
+
+[node name="Path" type="HBoxContainer" parent="MainSplit/BankItemEditor/Container" unique_id=581447966]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainSplit/BankItemEditor/Container/Path" unique_id=1344024615]
+layout_mode = 2
+text = "Source File Path"
+
+[node name="FilePathLine" type="LineEdit" parent="MainSplit/BankItemEditor/Container/Path" unique_id=1174536962]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "path/to/file.mp3"
+editable = false
+
+[node name="CenterContainer" type="CenterContainer" parent="MainSplit/BankItemEditor/Container" unique_id=670511765]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainSplit/BankItemEditor/Container/CenterContainer" unique_id=85533829]
+layout_mode = 2
+
+[node name="RemoveButton" type="Button" parent="MainSplit/BankItemEditor/Container/CenterContainer/HBoxContainer" unique_id=1125055528]
+layout_mode = 2
+text = "Remove"
+
+[node name="SaveButton" type="Button" parent="MainSplit/BankItemEditor/Container/CenterContainer/HBoxContainer" unique_id=1568870822]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save"
+
+[connection signal="empty_clicked" from="MainSplit/BankList/VBoxContainer/BankList" to="." method="_on_list_empty_clicked"]
+[connection signal="item_selected" from="MainSplit/BankList/VBoxContainer/BankList" to="." method="_on_list_item_selected"]
+[connection signal="text_changed" from="MainSplit/BankItemEditor/Container/AudioId/AudioIdLine" to="." method="_on_audio_id_line_text_updated"]
+[connection signal="pressed" from="MainSplit/BankItemEditor/Container/CenterContainer/HBoxContainer/RemoveButton" to="." method="_on_remove_button_pressed"]
+[connection signal="pressed" from="MainSplit/BankItemEditor/Container/CenterContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]

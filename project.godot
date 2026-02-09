@@ -17,11 +17,7 @@ config/features=PackedStringArray("4.6", "Mobile")
 [autoload]
 
 FTool_DebugDraw="*uid://02rhy3ymkb6d"
-
-[display]
-
-window/size/viewport_width=320
-window/size/viewport_height=200
+FTool_AudioManager="*uid://cvlw372o15mu1"
 
 [editor_plugins]
 

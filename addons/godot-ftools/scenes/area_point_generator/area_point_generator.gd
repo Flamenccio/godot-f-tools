@@ -19,7 +19,8 @@ const _META_AREA_POINT_SHAPE = "area_point_shape"
 
 func _enter_tree() -> void:
 	if Engine.is_editor_hint():
-		set_editable_instance(self, true)
+		#set_editable_instance(self, true)
+		pass
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():

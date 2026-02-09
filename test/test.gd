@@ -6,3 +6,6 @@ func _test_random_point() -> void:
 
 func _test_debug_draw() -> void:
 	FTool_DebugDraw.debug_draw_circle(3.0, Vector2.ZERO, 6.0, Color.RED)
+
+func _test_sound() -> void:
+	FTool_AudioManager.play_audio("gain_powerup", "Master")
