@@ -49,10 +49,10 @@ func is_audio_file_added(path: String) -> bool:
 
 func _check_files() -> void:
 	var cleaned: Array[FTool_AudioBankData]
-	print("size: ", audio_bank.size())
+	#print("size: ", audio_bank.size())
 	for i in range(audio_bank.size()):
-		print("{0}: {1}".format({"0": i, "1": audio_bank[i]}))
-		print("{0}: {1}".format({"0": i, "1": audio_bank[i].get("audio_stream")}))
+		#print("{0}: {1}".format({"0": i, "1": audio_bank[i]}))
+		#print("{0}: {1}".format({"0": i, "1": audio_bank[i].get("audio_stream")}))
 		var current = audio_bank[i]
 		if current != null and current.audio_stream != null and \
 				not current.audio_stream.resource_path.is_empty():

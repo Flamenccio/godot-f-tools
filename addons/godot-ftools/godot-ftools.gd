@@ -16,6 +16,7 @@ var audio_context_menu: EditorContextMenuPlugin
 var audio_bank: FTool_AudioBank
 
 func _enable_plugin() -> void:
+
 	add_autoload_singleton(SINGLETON_DEBUG_DRAW, DEBUG_DRAW_SCIRPT)
 	add_autoload_singleton(SINGLETON_AUDIO_MANAGER, AUDIO_MANAGER_SCRIPT)
 
@@ -36,7 +37,7 @@ func _enter_tree() -> void:
 		audio_bank = load(full_path)
 
 	audio_bank.self_start()
-	print("bank: ", audio_bank)
+	#print("bank: ", audio_bank)
 
 	# Audio dock
 	audio_dock = EditorDock.new()
