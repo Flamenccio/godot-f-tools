@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c3360hy8x55r3"]
 
 [ext_resource type="Script" uid="uid://dey1ao12idbjp" path="res://addons/godot-ftools/scenes/area_point_generator/area_point_generator.gd" id="1_j56fi"]
-[ext_resource type="Script" uid="uid://bshgclcilog2u" path="res://test/test.gd" id="1_upc40"]
+[ext_resource type="Script" uid="uid://bshgclcilog2u" path="res://addons/godot-ftools/scenes/test/test.gd" id="1_upc40"]
 [ext_resource type="Script" uid="uid://jjw0m7n5mqc" path="res://addons/godot-ftools/scenes/area_point_generator/area_point_shape.gd" id="3_upc40"]
 
 [sub_resource type="ConcavePolygonShape2D" id="ConcavePolygonShape2D_yf5tx"]
