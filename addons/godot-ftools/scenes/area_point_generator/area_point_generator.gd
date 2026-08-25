@@ -1,11 +1,11 @@
 @tool
 class_name FTool_AreaPointGenerator
 extends Node2D
-## Generates randomized points in areas composed of [code]CollisionShape2D[/code]s.
+## Generates randomized points in areas composed of [CollisionShape2D]s.
 ##
 ## These collision shapes are not actually used for collision, and are used
 ## as a way to easily edit the areas' shape and position.[br]
-## On [code]_ready[/code], this node removes its [code]CollisionShape2D[/code] children.[br]
+## On [method _ready], this node removes its [CollisionShape2D] children.[br]
 ## For best results, ensure minimal overlap between shapes.[br]
 
 const _META_AREA_POINT_SHAPE = "area_point_shape"
@@ -33,8 +33,9 @@ func get_random_area_point() -> Vector2:
 	var r = randi_range(0, get_areas() - 1)
 	return get_random_area_point_in_area(r)
 
+
 ## Get a random point in a specific shape area.[br]
-## See [code]get_areas[/code] to get the number of saved areas.
+## See [method get_areas] to get the number of saved areas.
 func get_random_area_point_in_area(area_idx: int) -> Vector2:
 	if area_idx >= get_areas():
 		return global_position
@@ -93,9 +94,11 @@ func get_random_area_point_in_area(area_idx: int) -> Vector2:
 
 	return global_position
 
+
 ## Return the amount of shape areas this area point generator has saved.
 func get_areas() -> int:
 	return shapes.size()
+
 
 func save_shapes() -> void:
 	shapes.clear()

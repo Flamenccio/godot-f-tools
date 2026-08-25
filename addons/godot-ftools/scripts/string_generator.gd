@@ -3,7 +3,7 @@ extends RefCounted
 ## Generates randomized strings.
 ##
 ## Users can choose what characters appear in the generated
-## string by passing unions of [code]CharFlags[/code].[br]
+## string by passing unions of [enum CharFlags].[br]
 ## Note that symbols include the following: [code]!#$%^&*?/+_-=[/code]
 
 const _LATIN_UNICODE_MIN = 65
@@ -24,9 +24,9 @@ enum CharFlags {
 	SYMBOLS = 4,
 }
 
-## Generate a string of [code]length[/code] characters.[br]
-## [code]char_flags[/code] determines what characters can be generated. Use bitwise [code]OR[/code]
-## between [code]CharFlags[/code] values to choose.[br]
+## Generate a string of [param length] characters.[br]
+## [param char_flags] determines what characters can be generated. Use bitwise [code]OR[/code]
+## between [enum CharFlags] values to choose.[br]
 ## By default, generates latin alphabet, numbers, and symbols.
 static func generate_string(length := 8, char_flags := CharFlags.LATIN_ALPHABET | CharFlags.NUMBERS | CharFlags.SYMBOLS) -> String:
 

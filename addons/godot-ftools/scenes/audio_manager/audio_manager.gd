@@ -22,10 +22,12 @@ func _ready() -> void:
 	_main_player.max_polyphony = _MAIN_POLYPHONY
 	add_child(_main_player)
 
+
 func _exit_tree() -> void:
 	ResourceSaver.save(_audio_bank, _CACHE_DIRECTORY.path_join(_BANK_FILE))
 
-## Plays non-positional audio from [code]from[/code] seconds.
+
+## Plays non-positional audio from [param from] seconds.
 func play_audio(audio_id: String, bus: StringName, from := 0.0, to := -1.0) -> void:
 	var stream = _audio_bank.get_audio_stream(audio_id)
 	if not _main_player.has_stream_playback():
@@ -35,8 +37,9 @@ func play_audio(audio_id: String, bus: StringName, from := 0.0, to := -1.0) -> v
 	var playback := _main_player.get_stream_playback()
 	playback.play_stream(stream, from, 0.0, 1.0, 0, bus)
 
-## Plays positional audio at global position [code]at[/code], and from [code]from[/code] seconds.[br]
-## if [code]custom_parent[/code] is set, attempts to add the audio player as a child of [code]custom_parent[/code].
+
+## Plays positional audio at global position [param at], and from [param from] seconds.[br]
+## if [param custom_parent] is set, attempts to add the audio player as a child of [param custom_parent].
 func play_audio_at(at: Vector2, audio_id: String, bus: StringName, from := 0.0, custom_parent: Node2D = null) -> void:
 
 	var new_player := AudioStreamPlayer2D.new()
@@ -52,9 +55,11 @@ func play_audio_at(at: Vector2, audio_id: String, bus: StringName, from := 0.0, 
 	new_player.play(from)
 	new_player.finished.connect(_on_positional_player_finished.bind(new_player))
 
+
 func _on_positional_player_finished(player: AudioStreamPlayer2D) -> void:
 	player.queue_free()
 	_positional_players.erase(player)
+
 
 static func get_audio_id(audio_file: AudioStream) -> String:
 	if audio_file == null:
@@ -65,3 +70,4 @@ static func get_audio_id(audio_file: AudioStream) -> String:
 		push_error("Audio file {0} does not have a valid path".format({"0": audio_file}))
 		return ""
 	return p
+

@@ -20,9 +20,7 @@ enum AxisUpdateType {
 
 signal button_down(button_name: StringName)
 signal button_up(button_name: StringName)
-
 signal axis_updated(axis_name: String, value: float)
-
 signal vector_updated(vector_name: String, value: Vector2)
 
 # Private
@@ -33,21 +31,26 @@ signal _physics_process_called()
 var _inputs: Array[FTool_InputObserver]
 var _input_values: Dictionary[StringName, Variant]
 
+
 func _ready() -> void:
 	_add_inputs()
+
 
 func _input(event: InputEvent) -> void:
 	_input_occurred.emit(event)
 
+
 func _process(_delta: float) -> void:
 	_process_called.emit()
+
 
 func _physics_process(_delta: float) -> void:
 	_physics_process_called.emit()
 
-## Create a button input named [code]button_name[/code].[br]
-## When the action is pressed, [code]button_down[/code] will emit with its name.[br]
-## When the action is released, [code]button_down[/code] will emit with its name.[br]
+
+## Create a button input named [param button_name].[br]
+## When the action is pressed, [param button_down] will emit with its name.[br]
+## When the action is released, [param button_up] will emit with its name.[br]
 func create_button_input(input_name: StringName, action_name: StringName) -> void:
 
 	if input_name.is_empty():
@@ -65,10 +68,13 @@ func create_button_input(input_name: StringName, action_name: StringName) -> voi
 	var new_observer := _create_observer(input_name, f, AxisUpdateType.ON_INPUT_EVENT)
 	_inputs.append(new_observer)
 
-## Create an axis input named [code]input_name[/code].[br]
-## When the action named [code]positive_action_name[/code] is pressed, the axis's value increases.[br]
-## When the action named [code]negative_action_name[/code] is pressed, the axis's value decreases.[br]
-## Any time an axis's value is changed, [code]axis_updated[/code] is emitted with [code]input_name[/code] and
+
+# TODO: update
+
+## Create an axis input named [param input_name].[br]
+## While the action named [param positive_action_name] is pressed, the axis's value increases.[br]
+## While the action named [param negative_action_name] is pressed, the axis's value decreases.[br]
+## Any time an axis's value is changed, [signal axis_updated] is emitted with [param input_name] and
 ## the axis's new value.[br]
 func create_axis_input(input_name: StringName, positive_action_name: StringName, negative_action_name: StringName, \
 		update_type := AxisUpdateType.ON_INPUT_EVENT) -> void:
@@ -88,10 +94,11 @@ func create_axis_input(input_name: StringName, positive_action_name: StringName,
 	var new_observer := _create_observer(input_name, f, update_type)
 	_inputs.append(new_observer)
 
-## Create a vector 2 input named [code]input_name[/code].[br]
-## The [b]positive[/b] actions increase the value of their respective axes.[br]
-## The [b]negative[/b] actions decrease the value of their respective axes.[br]
-## Any time a vector is changed, [code]vector_updated[/code] is emitted with [code]input_name[/code] and
+
+## Create a vector 2 input named [param input_name].[br]
+## The [b]positive[/b] actions increase the value of their respective axes while pressed.[br]
+## The [b]negative[/b] actions decrease the value of their respective axes while pressed.[br]
+## Any time a vector is changed, [signal vector_updated] is emitted with [param input_name] and
 ## the vector's new value.[br]
 func create_vector_input(input_name: StringName, positive_x_action: StringName, negative_x_action: StringName, \
 		positive_y_action: StringName, negative_y_action: StringName, update_type := AxisUpdateType.ON_INPUT_EVENT) -> void:
@@ -111,10 +118,11 @@ func create_vector_input(input_name: StringName, positive_x_action: StringName, 
 	var new_observer := _create_observer(input_name, f, update_type)
 	_inputs.append(new_observer)
 
-## Create a throttle input named [code]input_name[/code].[br]
-## The value of a throttle input depends solely on the strength of the action [code]action_name[/code].[br]
+
+## Create a throttle input named [param input_name].[br]
+## The value of a throttle input depends solely on the strength of the action [param action_name].[br]
 ## For example, think of the triggers of an XBox controller.[br]
-## Any time a throttle's value is changed, [code]axis_updated[/code] is emitted with [code]input_name[/code] and
+## Any time a throttle's value is changed, [signal axis_updated] is emitted with [param input_name] and
 ## the throttle's new value.
 func create_throttle_input(input_name: StringName, action_name: StringName, update_type := AxisUpdateType.ON_INPUT_EVENT) -> void:
 
@@ -134,7 +142,7 @@ func create_throttle_input(input_name: StringName, action_name: StringName, upda
 	_inputs.append(new_observer)
 
 
-## Attempts to remove a previously created input named [code]input_name[/code].
+## Attempts to remove a previously created input named [param input_name].
 ## Does nothing if the input does not exist.
 func remove_input(input_name: StringName) -> void:
 

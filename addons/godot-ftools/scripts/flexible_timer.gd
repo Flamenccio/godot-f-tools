@@ -17,7 +17,7 @@ var one_shot := false
 var paused := true
 
 ## If [code]true[/code], the timer will always process in realtime,
-## ignoring [code]Engine.time_scale[/code].
+## ignoring [member Engine.time_scale].
 var ignore_time_scale := false
 
 ## Time required for the timer to end, in seconds.
@@ -26,7 +26,7 @@ var wait_time := 1.0:
 		wait_time = max(0.0, value)
 
 ## Time left until the timer ends, in seconds. This value is readonly, but
-## can be changed through [code]change_time_left[/code].
+## can be changed through [method change_time_left].
 var time_left := 0.0:
 	set(value):
 		return
@@ -55,8 +55,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		_time_left -= (delta / Engine.time_scale)
 
-## Start the timer. If [code]time[/code] is more than 0.0,
-## sets [code]wait_time[/code] to [code]time[/code], overwriting it.[br]
+## Start the timer. If [param time] is more than 0.0,
+## sets [member wait_time] to [param time], overwriting it.[br]
 ## If the timer is already started, restarts the timer.
 func start(time := -1.0) -> void:
 	if time > 0.0:
@@ -64,12 +64,12 @@ func start(time := -1.0) -> void:
 	_time_left = wait_time
 	_stopped = false
 
-## Stops the timer, setting [code]time_left[/code] back to [code]wait_time[/code]
+## Stops the timer, setting [member time_left] back to [member wait_time]
 func stop() -> void:
 	_time_left = wait_time
 	_stopped = true
 
-## Changes the timer's [code]time_left[/code]. Does not change
-## [code]wait_time[/code], and cannot drop below 0.
+## Changes the timer's [member time_left]. Does not change
+## [member wait_time], and cannot drop below 0.
 func change_time_left(change: float) -> void:
 	_time_left = max(0.0, _time_left + change)
