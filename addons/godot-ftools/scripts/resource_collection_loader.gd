@@ -26,10 +26,18 @@ static func load_resources(path: String, resource_class_name := "", recursive :=
 			if res == null:
 				current = dir.get_next()
 				continue
-			var res_script := res.get_script() as Script
-			var is_resource_class := res_script.get_global_name() == resource_class_name or \
-					res_script.get_base_script().get_global_name() == resource_class_name
-			if resource_class_name.is_empty() or is_resource_class:
+
+			# Check built-in class
+			if res.is_class(resource_class_name):
 				result.append(res)
+
+			# Check custom global class
+			elif res is Script:
+				var res_script := res.get_script() as Script
+				var is_resource_class := res_script.get_global_name() == resource_class_name or \
+						res_script.get_base_script().get_global_name() == resource_class_name
+				if resource_class_name.is_empty() or is_resource_class:
+					result.append(res)
+
 		current = dir.get_next()
 	return result
