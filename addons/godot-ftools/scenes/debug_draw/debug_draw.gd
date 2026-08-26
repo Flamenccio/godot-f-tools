@@ -14,10 +14,12 @@ func _process(delta: float) -> void:
 	else:
 		process_mode = Node.PROCESS_MODE_DISABLED
 
+
 func _draw() -> void:
 	draw_called.emit()
 
-## Draw a circle at [code]position[/code] for [code]duration[/code] seconds.
+
+## Draw a circle at [param position] for [param duration] seconds.
 func debug_draw_circle(duration: float, position: Vector2, radius: float, color: Color, filled := true, \
 		width := -1.0, antialiased := false) -> void:
 	_create_draw_process(func(): 
@@ -25,7 +27,8 @@ func debug_draw_circle(duration: float, position: Vector2, radius: float, color:
 		duration
 	)
 
-## Draw a rectangle defined by [code]rect[/code] for [code]duration[/code] seconds.
+
+## Draw a rectangle defined by [param rect] for [param duration] seconds.
 func debug_draw_rect(duration: float, rect: Rect2, color: Color, filled := true, width := -1.0, \
 		antialiased := false) -> void:
 	_create_draw_process(func():
@@ -33,7 +36,8 @@ func debug_draw_rect(duration: float, rect: Rect2, color: Color, filled := true,
 		duration
 	)
 
-## Draw an arc at [code]center[/code] for [code]duration[/code] seconds.
+
+## Draw an arc at [param center] for [param duration] seconds.
 func debug_draw_arc(duration: float, center: Vector2, radius: float, start_angle: float, \
 		end_angle: float, point_count: int, color: Color, width := -1.0, antialiased := false) -> void:
 	_create_draw_process(func():
@@ -41,7 +45,8 @@ func debug_draw_arc(duration: float, center: Vector2, radius: float, start_angle
 		duration
 	)
 
-## Draw a single-colored polygon defined by [code]points[/code] for [code]duration[/code] seconds.
+
+## Draw a single-colored polygon defined by [param points] for [param durations] seconds.
 func debug_draw_colored_polygon(duration: float, points: PackedVector2Array, color: Color, \
 		uvs := PackedVector2Array(), texture: Texture2D = null) -> void:
 	_create_draw_process(func():
@@ -49,7 +54,8 @@ func debug_draw_colored_polygon(duration: float, points: PackedVector2Array, col
 		duration
 	)
 
-## Draw an ellipse at [code]position[/code] for [code]duration[/code] seconds.
+
+## Draw an ellipse at [param position] for [param duration] seconds.
 func debug_draw_ellipse(duration: float, position: Vector2, major: float, minor: float, \
 		color: Color, filled := true, width := 1.0, antialiased := false) -> void:
 	_create_draw_process(func():
@@ -57,7 +63,8 @@ func debug_draw_ellipse(duration: float, position: Vector2, major: float, minor:
 		duration
 	)
 
-## Draw a partial ellipse centered at [code]center[/code] for [code]duration[/code] seconds.
+
+## Draw a partial ellipse centered at [param center] for [param duration] seconds.
 func debug_draw_ellipse_arc(duration: float, center: Vector2, major: float, minor: float, \
 		start_angle: float, end_angle: float, point_count: int, color: Color, width := -1.0, \
 		antialiased := false) -> void:
@@ -67,8 +74,9 @@ func debug_draw_ellipse_arc(duration: float, center: Vector2, major: float, mino
 		duration
 	)
 
-## Draw a line that passes through points [code]from[/code] and [code]to[/code] 
-## for [code]duration[/code] seconds.
+
+## Draw a line that passes through points [param from] and [param to] 
+## for [param duration] seconds.
 func debug_draw_line(duration: float, from: Vector2, to: Vector2, color: Color, \
 		width := -1.0, antialiased := false) -> void:
 	_create_draw_process(func():
@@ -76,8 +84,9 @@ func debug_draw_line(duration: float, from: Vector2, to: Vector2, color: Color, 
 		duration
 	)
 
-## Draw multiple disconnected lines of the same width and color for [code]duration[/code] seconds.
-## For connected lines, see [code]debug_draw_polyline[/code].
+
+## Draw multiple disconnected lines of the same width and color for [param duration] seconds.
+## For connected lines, see [method debug_draw_polyline].
 func debug_draw_multiline(duration: float, points: PackedVector2Array, color: Color, \
 		width := -1.0, antialiased := false) -> void:
 	_create_draw_process(func():
@@ -85,14 +94,15 @@ func debug_draw_multiline(duration: float, points: PackedVector2Array, color: Co
 		duration
 	)
 
-## Draw interconnected lines of the same width and color for [code]duration[/code] seconds.
-## For disconnected lines, see [code]debug_draw_multiline[/code].
+## Draw interconnected lines of the same width and color for [param duration] seconds.
+## For disconnected lines, see [method debug_draw_multiline].
 func debug_draw_polyline(duration: float, points: PackedVector2Array, color: Color, \
 		width := -1.0, antialiased := false) -> void:
 	_create_draw_process(func():
 		draw_polyline(points, color, width, antialiased),
 		duration
 	)
+
 
 func _create_draw_process(draw_call: Callable, duration: float) -> FTool_DebugDrawProcess:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -105,9 +115,11 @@ func _create_draw_process(draw_call: Callable, duration: float) -> FTool_DebugDr
 	_draws_size += 1
 	return new_process
 
+
 func _destroy_process(process: FTool_DebugDrawProcess) -> void:
 	processed.disconnect(process.count_down)
 	draw_called.disconnect(process.draw_call)
 	queue_redraw()
 	_draws_size -= 1
 	process.call_deferred("free")
+
