@@ -7,6 +7,7 @@ const _MAIN_POLYPHONY = 32
 
 var _main_player: AudioStreamPlayer
 var _audio_bank: FTool_AudioBank
+var _audio_bank_uid: String
 var _positional_players: Array[AudioStreamPlayer2D]
 
 func _ready() -> void:
@@ -18,6 +19,7 @@ func _ready() -> void:
 		return
 	
 	_audio_bank = load(full_path)
+	_audio_bank_uid = ResourceUID.path_to_uid(full_path)
 	_main_player = AudioStreamPlayer.new()
 	_main_player.max_polyphony = _MAIN_POLYPHONY
 	add_child(_main_player)
@@ -25,6 +27,7 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	ResourceSaver.save(_audio_bank, _CACHE_DIRECTORY.path_join(_BANK_FILE))
+	ResourceSaver.set_uid(_CACHE_DIRECTORY.path_join(_BANK_FILE), ResourceUID.text_to_id(_audio_bank_uid))
 
 
 ## Plays non-positional audio from [param from] seconds.
