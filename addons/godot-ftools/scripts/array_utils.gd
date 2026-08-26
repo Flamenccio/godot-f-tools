@@ -54,3 +54,38 @@ static func to_set(a: Array) -> Array:
 			set.append(element)
 	return set
 
+
+## Returns [code]true[/code] when [param e] is [b]not[/b]
+## in [param a].[br]
+## This is equivalent to [code]not a.has(e)[/code].[br]
+static func not_has(a: Array, e: Variant) -> bool:
+	return not a.has(e)
+
+
+## Returns [code]true[/code] when [param f] returns [code]false[/code]
+## For all elements of [param a].[br]
+## Like [method Array.any], [param f] should take one [Variant] parameter
+## and return a [bool].
+## This is equivalent to [code]not a.any(f)[/code].
+static func none(a: Array, f: Callable) -> bool:
+	return not a.any(f)
+
+
+## Returns an [Array] of indices of [param a] to which [param f] returns [code]true[/code].[br]
+## [param f] should take a [Variant] parameter.
+static func find_all_custom(a: Array, f: Callable, from := 0) -> Array[int]:
+	var idxs: Array[int]
+	for i in range(from, a.size()):
+		if f.call(a[i]):
+			idxs.append(i)
+	return idxs
+
+
+## Returns an [Array] of indices of [param a] to which [param what] is equal to.[br]
+static func find_all(a: Array, what: Variant, from := 0) -> Array[int]:
+	var idxs: Array[int]
+	for i in range(from, a.size()):
+		if a[i] == what:
+			idxs.append(i)
+	return idxs
+

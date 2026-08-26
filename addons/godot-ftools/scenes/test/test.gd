@@ -9,3 +9,9 @@ func _test_debug_draw() -> void:
 
 func _test_sound() -> void:
 	FTool_AudioManager.play_audio("gain_powerup", "Master")
+
+func _test_arrays() -> void:
+	var a: Array[int] = [1, 2, 3]
+	var b: Array = [1, 2, "3"]
+	print("a == b: ", a == b)
+

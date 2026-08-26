@@ -37,6 +37,10 @@ text = "Debug draw"
 layout_mode = 2
 text = "Test audio"
 
+[node name="Test4" type="Button" parent="UI/Buttons" unique_id=525923528]
+layout_mode = 2
+text = "Test arrays"
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=876225188]
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1774526644]
@@ -44,3 +48,4 @@ text = "Test audio"
 [connection signal="pressed" from="UI/Buttons/Test" to="." method="_test_random_point"]
 [connection signal="pressed" from="UI/Buttons/Test2" to="." method="_test_debug_draw"]
 [connection signal="pressed" from="UI/Buttons/Test3" to="." method="_test_sound"]
+[connection signal="pressed" from="UI/Buttons/Test4" to="." method="_test_arrays"]
